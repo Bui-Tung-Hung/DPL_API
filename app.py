@@ -22,7 +22,7 @@ def preprocess_image(image):
     image = np.expand_dims(image, axis=0)  # Thêm batch dimension (1, 784)
     return image
 
-@cross_origin()
+@cross_origin('*')
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
