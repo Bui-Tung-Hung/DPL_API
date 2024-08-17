@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwriting Recognition</title>
+</head>
+<body>
+    <h1>Upload a Handwriting Image</h1>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadImage()">Upload and Predict</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function uploadImage() {
+            const input = document.getElementById('fileInput');
+            if (input.files.length === 0) {
+                alert("Please select a file!");
+                return;
+            }
+
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = "Predicted Class: " + data.predicted_class;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
