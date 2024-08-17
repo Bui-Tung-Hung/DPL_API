@@ -12,7 +12,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 # Load mô hình đã lưu
-model = tf.keras.models.load_model('handwriting_recognition_model.h5')
+model = tf.keras.models.load_model('./handwriting_recognition_model.h5')
 
 def preprocess_image(image):
     image = image.resize((28, 28))  # Resize ảnh về kích thước 28x28
