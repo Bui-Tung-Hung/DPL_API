@@ -6,7 +6,7 @@ import io
 from flask import Flask
 from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, "origins": ["http://localhost:5000", "https://bui-tung-hung.github.io/DPL_API/"])
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
@@ -22,7 +22,7 @@ def preprocess_image(image):
     image = np.expand_dims(image, axis=0)  # Thêm batch dimension (1, 784)
     return image
 
-@cross_origin('*')
+@cross_origin()
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
